@@ -18,10 +18,9 @@
 </form>
 <h1>XSD to OWL API</h1>
 <p>The base address of the service is: <b><%=request.getRequestURL()%>xsd2owl</b></p>
-<p>It can called using <b>GET</b> or <b>POST</b>. The former is recommended when the RDF to be transformed is available from a URI, the latter when direct input is provided.</p>
-<p>The parameter of the service is:</p>
+<p>It can called using <b>GET</b>. The parameter of the service is:</p>
 <ul>
-    <li><b>xsd= URI | XML</b>: the XML source of the XML Schema to be processed or a URL pointing to a XSD.</li>
+    <li><b>xsd= URL</b>: an URL pointing to the XML source of the XML Schema to be processed.</li>
 </ul>
 <p>Example using GET:</p>
 <p><a target="_blank" href="<%=request.getRequestURL()%>xsd2owl?xsd=http://www.w3.org/TR/xmldsig-core/xmldsig-core-schema.xsd"><b><%=request.getRequestURL()%>xsd2owl</b>?<b>xsd</b>=http://www.w3.org/TR/xmldsig-core/xmldsig-core-schema.xsd</a></p>
