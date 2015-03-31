@@ -1,6 +1,6 @@
-Rhizomer
-========
-Copyright (C) 2014  Roberto García (http://rhizomik.net/~roberto/)
+ReDeFer XSD2OWL
+===============
+Copyright (C) 2015  Roberto García (http://rhizomik.net/~roberto/)
 if not stated otherwise. Some files might have their own copyright 
 statement.
 
@@ -21,7 +21,7 @@ GNU GENERAL PUBLIC LICENSE
  Everyone is permitted to copy and distribute verbatim copies
  of this license document, but changing it is not allowed.
 
-                            Preamble
+                          Preamble
 
   The GNU General Public License is a free, copyleft license for
 software and other kinds of works.

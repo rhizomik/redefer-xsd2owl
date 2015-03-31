@@ -327,7 +327,7 @@ License: http://rhizomik.net/redefer/xsd2owl.xsl.rdf
 	<!-- Match elements declared inside the complexType with a reference to an external type -->
 	<xsl:template match="xsd:element[@name and @type and (ancestor::xsd:complexType or ancestor::xsd:group)]">
 		<owl:Restriction>
-			<owl:onProperty rdf:resource="#{@name}"/>
+			<owl:onProperty rdf:resource="{@name}"/>
 			<owl:allValuesFrom rdf:resource="{xo:rangeUri(., //xsd:simpleType[@name], namespace::*)}"/>
 		</owl:Restriction>
 		<xsl:call-template name="cardinality">
@@ -352,7 +352,7 @@ License: http://rhizomik.net/redefer/xsd2owl.xsl.rdf
 		otherwise embed class declaration for complexType -->
 	<xsl:template match="xsd:element[not(@type or @ref) and (ancestor::xsd:complexType or ancestor::xsd:group)]">
 		<owl:Restriction>
-			<owl:onProperty rdf:resource="#{@name}"/>
+			<owl:onProperty rdf:resource="{@name}"/>
 			<xsl:choose>
 				<xsl:when test="count(./xsd:simpleType)>0">
 					<owl:allValuesFrom rdf:resource="{xo:newRangeUri(., $baseEntity)}"/>
@@ -396,7 +396,7 @@ License: http://rhizomik.net/redefer/xsd2owl.xsl.rdf
 		</xsl:variable>
 		<xsl:if test="$minOccurs!='0'">
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="#{$property}"/>
+				<owl:onProperty rdf:resource="{$property}"/>
 				<owl:minCardinality rdf:datatype="&amp;xsd;nonNegativeInteger">
 					<xsl:value-of select="$minOccurs"/>
 				</owl:minCardinality>
@@ -404,7 +404,7 @@ License: http://rhizomik.net/redefer/xsd2owl.xsl.rdf
 		</xsl:if>
 		<xsl:if test="$maxOccurs!='unbounded'">
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="#{$property}"/>
+				<owl:onProperty rdf:resource="{$property}"/>
 				<owl:maxCardinality rdf:datatype="&amp;xsd;nonNegativeInteger">
 					<xsl:value-of select="$maxOccurs"/>
 				</owl:maxCardinality>
@@ -414,7 +414,7 @@ License: http://rhizomik.net/redefer/xsd2owl.xsl.rdf
 			  because there is not any other restriction on the property -->
 		<xsl:if test="$minOccurs='0' and $maxOccurs='unbounded' and $forceRestriction">
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="#{$property}"/>
+				<owl:onProperty rdf:resource="{$property}"/>
 				<owl:minCardinality rdf:datatype="&amp;xsd;nonNegativeInteger">
 					<xsl:value-of select="$minOccurs"/>
 				</owl:minCardinality>
@@ -426,14 +426,14 @@ License: http://rhizomik.net/redefer/xsd2owl.xsl.rdf
 	<xsl:template match="xsd:attribute[@name and @type and (ancestor::xsd:complexType or ancestor::xsd:attributeGroup)]">
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="#{@name}"/>
+				<owl:onProperty rdf:resource="{@name}"/>
 				<owl:allValuesFrom rdf:resource="{xo:rangeUri(., //xsd:simpleType[@name], namespace::*)}"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<xsl:if test="@use='required'">
 			<rdfs:subClassOf>
 				<owl:Restriction>
-					<owl:onProperty rdf:resource="#{@name}"/>
+					<owl:onProperty rdf:resource="{@name}"/>
 					<owl:minCardinality rdf:datatype="&amp;xsd;nonNegativeInteger">1</owl:minCardinality>
 				</owl:Restriction>
 			</rdfs:subClassOf>
@@ -463,7 +463,7 @@ License: http://rhizomik.net/redefer/xsd2owl.xsl.rdf
 	   <xsl:if test="not(@use='required')">
    			<rdfs:subClassOf>
 				<owl:Restriction>
-					<owl:onProperty rdf:resource="#{@name}"/>
+					<owl:onProperty rdf:resource="{@name}"/>
 					<owl:minCardinality rdf:datatype="&amp;xsd;nonNegativeInteger">0</owl:minCardinality>
 				</owl:Restriction>
 			</rdfs:subClassOf>
@@ -479,7 +479,7 @@ License: http://rhizomik.net/redefer/xsd2owl.xsl.rdf
 		<xsl:if test="@use='required'">
 			<rdfs:subClassOf>
 				<owl:Restriction>
-					<owl:onProperty rdf:resource="#{@name}"/>
+					<owl:onProperty rdf:resource="{@name}"/>
 					<owl:minCardinality rdf:datatype="&amp;xsd;nonNegativeInteger">1</owl:minCardinality>
 				</owl:Restriction>
 			</rdfs:subClassOf>

@@ -1,34 +1,18 @@
 package net.rhizomik.redefer.xsd2owl;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.StringWriter;
-import java.net.MalformedURLException;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.net.URLConnection;
+import net.rhizomik.redefer.util.URIResolverImpl;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.Source;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.URIResolver;
+import javax.xml.transform.*;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
-
-import org.xml.sax.SAXException;
-
-import net.rhizomik.redefer.util.URIResolverImpl;
+import java.io.*;
+import java.net.URL;
+import java.net.URLConnection;
 
 /**
  * @author http://rhizomik.net/~roberto
@@ -43,20 +27,20 @@ public class XSD2OWLServlet extends HttpServlet
 	{
 		super();
 	}
-	public void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, java.io.IOException {
 
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		performTask(request, response);
-
 	}
-	public void doPost(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, java.io.IOException {
 
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		performTask(request, response);
-
 	}
+
 	public String getServletInfo() 
 	{
 		return super.getServletInfo();
 	}
+
 	public void init(ServletConfig config) throws ServletException
 	{
 		super.init(config);
@@ -66,15 +50,12 @@ public class XSD2OWLServlet extends HttpServlet
         resolver = new URIResolverImpl(config.getServletContext().getRealPath("/"));
         //System.setProperty("javax.xml.transform.TransformerFactory", "net.sf.saxon.TransformerFactoryImpl");
 	}
+
 	public void performTask(HttpServletRequest request, HttpServletResponse response) throws ServletException 
 	{
 		try
 		{
 			String xsdURL = (String)request.getParameter("xsd");
-			
-            System.out.println("\n>>XSD2OWL Access<<\n"+
-            		"RemoteAddr: "+request.getRemoteAddr()+"\n"+
-            		"RequestXSD: "+xsdURL+"\n");
 			
 			URLConnection conn = new URL(xsdURL).openConnection();
 			int length = conn.getContentLength();
@@ -103,7 +84,7 @@ public class XSD2OWLServlet extends HttpServlet
         }
 	}
 	
-	public static void main(String[] args) throws MalformedURLException, IOException, TransformerException
+	public static void main(String[] args) throws IOException, TransformerException
 	{
 		URIResolver resolver = new URIResolverImpl("src/main/webapp/");
 		
